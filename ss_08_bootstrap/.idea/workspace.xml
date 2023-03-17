@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b9a7f7a-1f28-41e4-a7d9-f056e62d697a" name="Changes" comment="" />
+    <list default="true" id="1b9a7f7a-1f28-41e4-a7d9-f056e62d697a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../ss_01_csdl_quan_he/bai_tap/quan_ly_sinh_vien.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../ss_01_csdl_quan_he/bai_tap/quan_ly_sinh_vien.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,7 +37,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/DELL/Downloads/BaiKiemTra2",
+    "last_opened_file_path": "D:/codegym_module 3/A0722I1_BuiHuuNghia_Module3/A0722I1_Module3_/src/ss_12_jdbc",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -66,7 +69,8 @@
       <option name="presentableId" value="Default" />
       <updated>1678280816569</updated>
       <workItem from="1678280817746" duration="3352000" />
-      <workItem from="1678445635743" duration="3393000" />
+      <workItem from="1678445635743" duration="4613000" />
+      <workItem from="1678714140777" duration="24000" />
     </task>
     <servers />
   </component>
