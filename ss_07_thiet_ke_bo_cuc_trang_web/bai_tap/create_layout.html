@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    .container> div{
+      background: lavender;
+      border: 3px solid green;
+      padding: 30px;
+      font-size: 28px;
+      text-align: center;
+    }
+    .kazu1{grid-area: ichi}
+    .kazu2{grid-area: ni}
+    .kazu3{grid-area: san}
+    .kazu4{grid-area: yon}
+    .kazu5{grid-area: go}
+    .kazu6{grid-area: roku}
+
+
+    .container{
+      display: grid;
+      grid-template-areas:
+        "ichi ichi"
+        "ni ni"
+        "san go"
+        "yon go"
+        "roku roku";
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="kazu1">Header</div>
+  <div class="kazu2">nav</div>
+  <div class="kazu3">section</div>
+  <div class="kazu4">article</div>
+  <div class="kazu5">aside</div>
+  <div class="kazu6">footer</div>
+</div>
+</body>
+</html>

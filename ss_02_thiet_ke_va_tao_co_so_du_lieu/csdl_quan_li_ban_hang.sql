@@ -357,4 +357,44 @@ where
 						group by tong_tien_theo_hop_dong.ma_khach_hang
 						having sum(tong_tien_theo_hop_dong.tong_tien_hop_dong) > 10000000);
                         
-                        
+-- 18
+update khach_hang
+set ho_ten = 'del'
+where ma_khach_hang in (
+	select * from (select ma_khach_hang from khach_hang kh left join hop_dong hd using (ma_khach_hang)
+					where year(hd.ngay_lam_hop_dong)<2021) as kh_can_xoa
+);
+
+delete from hop_dong_chi_tiet
+where ma_hop_dong_chi_tiet in (
+	select * from (select ma_hop_dong_chi_tiet from khach_hang kh left join hop_dong hd using (ma_khach_hang) join hop_dong_chi_tiet hdct using (ma_hop_dong)
+					where kh.ho_ten = 'del') as hdct_can_xoa
+);
+
+delete from hop_dong
+where ma_khach_hang in (
+	select ma_khach_hang from khach_hang where ho_ten = 'del');
+
+delete from khach_hang
+where ho_ten = 'del';
+
+-- 19
+update dich_vu_di_kem
+set gia = gia *2
+where ma_dich_vu_di_kem in (
+select * from (select ma_dich_vu_di_kem from dich_vu_di_kem
+join hop_dong_chi_tiet
+using (ma_dich_vu_di_kem)
+join hop_dong
+using (ma_hop_dong)
+where year(ngay_lam_hop_dong) = 2020
+group by ma_dich_vu_di_kem
+having sum(so_luong)>=10) as dich_vu_di_kem_can_nag_gia
+);
+
+-- 20
+select ma_nhan_vien, ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi
+from nhan_vien
+union
+select ma_khach_hang, ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi
+from khach_hang;
