@@ -39,4 +39,10 @@ public class UsersService implements IUsersService {
         return iUsersRepository.search(country1);
     }
 
+    @Override
+    public List<User> sort_by_name() {
+
+        return iUsersRepository.sort_by_name();
+    }
+
 }

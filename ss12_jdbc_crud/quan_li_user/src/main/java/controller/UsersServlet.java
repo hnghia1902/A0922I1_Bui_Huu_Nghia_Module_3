@@ -9,16 +9,17 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "UsersServlet", value = {"/Users",""})
+@WebServlet(name = "UsersServlet", value = {"/Users", ""})
 public class UsersServlet extends HttpServlet {
     IUsersService iUsersService = new UsersService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null){
+        if (action == null) {
             action = "";
         }
-        switch (action){
+        switch (action) {
             case "Create":
                 createForm(request, response);
                 break;
@@ -28,16 +29,29 @@ public class UsersServlet extends HttpServlet {
             case "Edit":
                 edit(request, response);
                 break;
+            case "Sort":
+                sort(request, response);
             default:
                 showListUser(request, response);
                 break;
         }
     }
 
+    private void sort(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("listUsers", iUsersService.sort_by_name());
+        try {
+            request.getRequestDispatcher("showList.jsp").forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private void edit(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        request.setAttribute("user",iUsersService.edit(id));
+        request.setAttribute("user", iUsersService.edit(id));
         try {
             request.getRequestDispatcher("edit.jsp").forward(request, response);
         } catch (ServletException e) {
@@ -80,10 +94,10 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action==null){
+        if (action == null) {
             action = "";
         }
-        switch (action){
+        switch (action) {
             case "Create":
                 createUsers(request, response);
                 break;
@@ -97,9 +111,9 @@ public class UsersServlet extends HttpServlet {
     }
 
     private void search(HttpServletRequest request, HttpServletResponse response) {
-        String country1 =  request.getParameter("country");
+        String country1 = request.getParameter("country");
 
-        request.setAttribute("User",iUsersService.search(country1));
+        request.setAttribute("User", iUsersService.search(country1));
         try {
             request.getRequestDispatcher("showList.jsp").forward(request, response);
         } catch (ServletException e) {
@@ -126,16 +140,29 @@ public class UsersServlet extends HttpServlet {
     }
 
     private void createUsers(HttpServletRequest request, HttpServletResponse response) {
-                String name = request.getParameter("name");
-                String email = request.getParameter("email");
-                String country = request.getParameter("country");
-                User user = new User(name, email, country);
-                iUsersService.createUsers(user);
-                try {
-                    response.sendRedirect("/Users?action=showList&isCreate=2");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+        boolean result = true;
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String country = request.getParameter("country");
+        if(name.length() > 10){
+            result = false;
+        }
+        if(result){
+            User user = new User(name, email, country);
+            iUsersService.createUsers(user);
+            try {
+                response.sendRedirect("/Users?action=showList&m=1");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
+        }else{
+            try {
+                response.sendRedirect("/Users?action=Create");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     }
+
+}

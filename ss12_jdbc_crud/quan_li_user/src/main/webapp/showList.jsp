@@ -15,6 +15,7 @@
         <form action="/Users" method="post">
         <h3><input type="text" name="country"><input type="submit" name="action" value="Search"></h3>
         </form>
+        <a href="/Users?action=Sort">Sort by Name</a>
     </h2>
 </center>
     <table class="table">
@@ -30,6 +31,7 @@
         <tbody>
         <c:forEach var="users" items="${listUsers}">
             <tr>
+
                 <td><c:out value="${users.id}"/></td>
                 <td><c:out value="${users.name}"/></td>
                 <td><c:out value="${users.email}"/></td>
@@ -76,43 +78,23 @@
 </table>
 
 
-<%--<form name="refreshForm">--%>
-<%--    <input type="hidden" name="visited" value="" />--%>
-<%--</form>--%>
+<form name="refreshForm">
+    <input type="hidden" name="visited" value="" />
+</form>
 </body>
 <script src="webjars/bootstrap/5.2.3/js/bootstrap.bundle.js"></script>
 <script src="webjars/izitoast/1.4.0/dist/js/iziToast.js"></script>
 <SCRIPT>
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    if ( urlParams.get('isCreate')>1){
+    const urlParams = new URLSearchParams(window.location.search);
+    const isReload = performance.getEntriesByType("navigation").map((nav) => nav.type).includes('reload');
+
+    if(!isReload && urlParams.get('m') > 0){
         iziToast.success({
+            position: "topLeft",
             timeout: 20000,
             title: 'OK',
             message: 'Bạn đã tạo thành công!',
         });
-    }else if ( urlParams.get('isDelete')>0){
-        iziToast.success({
-            title: 'OK',
-            message: 'Ban da xoa thanh cong',
-        });
     }
-
-
-
-
-    // function checkRefresh()
-    // {
-    //
-    //     if( document.refreshForm.visited.value == "" )
-    //     {
-    //         document.refreshForm.visited.value = "1";
-    //         alert("0");
-    //     }
-    //     else
-    //     {
-    //         alert("1");
-    //     }
-    // }
 </SCRIPT>
 </html>

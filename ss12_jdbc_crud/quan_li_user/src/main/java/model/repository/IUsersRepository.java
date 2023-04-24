@@ -11,4 +11,5 @@ public interface IUsersRepository {
     User edit(int id);
     void  update(User user);
     User search(String country);
+    List<User> sort_by_name();
 }
